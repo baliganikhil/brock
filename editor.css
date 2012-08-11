@@ -131,3 +131,15 @@
 #causal_area {
 	display: none;
 }
+
+#btn_generate_onx {
+	text-decoration: none;
+	background-color: #30921E;
+	border-radius: 5px;
+	width: 120px;
+	text-align: center;
+}
+
+#btn_generate_onx a {
+	color: #FFF !important;
+}
