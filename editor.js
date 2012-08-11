@@ -74,10 +74,6 @@ function toggle_scheduler(hello) {
 }
 
 function add_cause_calendar() {
-	
-	var curDate = new Date();
-	var ts = curDate.getTime();
-
 	var properties = "<div class='btn-group' data-toggle='buttons-radio'><button class='btn btn-success active schedule_once'>Once</button><button class='btn btn-danger schedule_periodic'>Periodic</button></div> ";
 	properties += "<table class='table table-bordered'>";
 //	properties += "<tr>";
@@ -113,6 +109,9 @@ function add_cause_moving() {
 }
 
 function add_cause_call_receive() {
+	var curDate = new Date();
+	var ts = curDate.getTime();
+	var grid_id = "phone_nos_" + ts;
 
 	var label = {"phone": "Phone"};
 
@@ -125,8 +124,11 @@ function add_cause_call_receive() {
 
 	qbeEnabled = false;
 
+	properties = "<div id=" + grid_id + "></div>";
+	common_adder('call.png', "Call Receive", properties);
+
     renderGrid({
-		"id": "myGrid",
+		"id": grid_id,
 		"label": label,
 		"data": data,
 		"element_type": element_type,
@@ -137,13 +139,40 @@ function add_cause_call_receive() {
 		"actionButtonPosition":"line"
 	});
 
-	properties = "";
-
-	common_adder('call.png', "Call Receive", properties);
 
 }
 
 function add_cause_sms_receive() {
+	var curDate = new Date();
+	var ts = curDate.getTime();
+	var grid_id = "sms_from_" + ts;
+
+	var label = {"phone": "Phone"};
+
+	var data = null;
+
+    // We have added element types - instead of Read Only
+	var element_type = {
+		"phone": {"type":"text"}
+		};
+
+	qbeEnabled = false;
+
+	properties = "<div id=" + grid_id + "></div>";
+	properties += "<div>Contains: <input type='text'></div>";
+	common_adder('sms.png', "SMS Receive", properties);
+
+    renderGrid({
+		"id": grid_id,
+		"label": label,
+		"data": data,
+		"element_type": element_type,
+		"qbeEnabled": qbeEnabled,
+		"container": "table",
+		"addVisible": true,
+		"deleteVisible": true,
+		"actionButtonPosition":"line"
+	});
 
 }
 
