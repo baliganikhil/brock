@@ -1,27 +1,35 @@
-//[ {"name": "createTimer", "params": [ 'test', [2012,07,12,4,10], [3,6] ], "callbacks": [ { "name": "showNotification", "params": ["Hello Amod"] } ] } ]
+//[ [{"name": "createTimer", "params": [ 'test', [2012,07,12,4,10], [3,6] ]}], [ { "name": "showNotification", "params": ["Hello Amod"] } ] ]
 
 function cause_creator( data ) {
 	var source = "";
-	$.each( data, function( index, cause ) {
-		// This has to be first
-		source += effect_creator( cause["name"], cause["callbacks"] );
 
-		source += eval( cause["name"] )( cause["params"] );
+	// This has to be first
+
+	$.each( data[ 1 ], function( index, cause ) {
+
+		source += effect_creator( cause[ "name" ], cause[ "callbacks" ] );
 
 	});
+
+	$.each( data[ 0 ], function( index, cause ) {
+
+		source += eval( cause[ "name" ] )( cause[ "params" ] );
+
+	});
+
 	console.log( source );
 }
 
 function effect_creator( name, data ) {
 	var source = "";
 	$.each( data, function( index, effect ) {
-		source += eval( effect["name"] )( effect["params"] );
+		source += eval( effect[ "name" ] )( effect[ "params" ] );
 	});
 
 	var functions = "function callback() {";
 	$.each( data, function( index, effect ) {
 		var func = [
-			effect["name"],"();",
+			effect[ "name" ],"();",
 		].join("") + "\n";
 
 		functions += func;
@@ -33,7 +41,7 @@ function effect_creator( name, data ) {
 function showNotification( params ) {
 	var ret = [
 	"function showNotification() {",
-		"var notification = device.notifications.createNotification('", params[0], "');",
+		"var notification = device.notifications.createNotification('", params[ 0 ], "');",
 	    "notification.show();",
 	"}"].join("") + "\n";
 
