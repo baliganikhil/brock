@@ -71,7 +71,8 @@ function common_adder(target, icon, title, properies_html) {
 	point += "</div>";
 	point += "</div>";
 
-	point = "<li class='each_cause' data-cause_effect_type='" + title + "' style='display: none'>" + point + "</li>";
+	var class_name = target == 'lst_causes' ? 'each_cause' : 'each_effect';
+	point = "<li class='" + class_name + "' data-cause_effect_type='" + title + "' style='display: none'>" + point + "</li>";
 
 
 	$("#" + target).append(point);
@@ -291,6 +292,17 @@ function add_effect_kill_app() {
 $('#btn_generate_onx').live('click', function() {
 	var isValid = true;
 
+	// First ensure that neither list is empty
+	if ($('li.each_cause').length === 0) {
+		show_error_message("Please select at least one 'Cause' from the toolbar on the left");
+		return false;
+	}
+
+	if ($('li.each_effect').length === 0) {
+		show_error_message("Please select at least one 'Effect' from the toolbar on the right");
+		return false;
+	}
+
 	// Go through causes
 	$('li.each_cause').each(function(key, value) {
 		var cur_type = $(this).data('cause_effect_type');
@@ -388,7 +400,10 @@ function show_error_message(message, target) {
 	$("#actual_error_message").html(message);
 	$('#error_message').slideDown();
 
-	expand_causal_point($(target));
+	if (!nullOrEmpty(target)) {
+		expand_causal_point($(target));	
+	}
+	
 }
 
 $('#close_error_message').live('click', function() {
