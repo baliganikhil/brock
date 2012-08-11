@@ -1,0 +1,178 @@
+body {
+	background: url('images/yahoo_wp.jpg');
+}
+
+#brock_body {
+	margin-top: 30px;
+}
+
+#error_message {
+	margin-top: 30px;
+	display: none;
+}
+
+#main_screen {
+	background: #DFDFD6;
+}
+
+.toolbar_icon {
+	width: 75px;
+	height: 75px;
+/*	border: solid 1px silver;
+	border-radius: 5px;
+
+	box-shadow: 1px 1px 1px silver;
+*/
+	margin-top: 5px;
+}
+
+.toolbar_icon img {
+	border-radius: 10px;
+}
+
+.toolbar_icon img:hover {
+	margin-top: 3px;
+	margin-left: 3px;
+}
+
+#lst_causes, #lst_effects {
+	margin-top: 35px;
+	margin-right: 15px;
+}
+
+.each_cause, .each_effect {
+	margin-top: 15px;
+	list-style-type: none;
+	border: solid 1px silver; 
+	/*padding: 20px;*/
+
+	height: 90px;
+	border-radius: 15px;
+
+	opacity: 0.8;
+
+	color: #FFF;
+	font-size: 20px;
+
+	background: #356aa0; /* Old browsers */
+	background: -moz-linear-gradient(top, #356aa0 0%, #356aa0 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#356aa0), color-stop(100%,#356aa0)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #356aa0 0%,#356aa0 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #356aa0 0%,#356aa0 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #356aa0 0%,#356aa0 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #356aa0 0%,#356aa0 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#356aa0', endColorstr='#356aa0',GradientType=0 ); /* IE6-9 */
+}
+
+.cause_icon {
+	float: left;
+	width: 60px;
+	height: 60px;
+}
+
+.cause_title {
+	float: left;
+	font-size: 37px;
+	margin-top: 30px;
+}
+
+.edit_button , .close_button{
+	float: right;
+	margin-left: 1px;
+	margin-right: 1px;
+}
+
+.cause_point {
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+.cause_point_header, .cause_icon {
+	height: 60px;
+}
+
+.cause_properties {
+	height: 330px;
+	margin-top: 25px;
+	overflow: auto;
+}
+
+.table {
+	margin-top: 10px;
+	background: #eeeeee; /* Old browsers */
+	background: -moz-linear-gradient(top, #eeeeee 0%, #eeeeee 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #eeeeee 0%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #eeeeee 0%,#eeeeee 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #eeeeee 0%,#eeeeee 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #eeeeee 0%,#eeeeee 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
+
+	box-shadow: 2px 2px 2px #291414;
+	width: 98%
+}
+
+.table tr {
+	font: white;
+}
+
+.table th {
+	font: white;
+}
+
+.table td {
+	font: white;
+}
+
+.schedule_weekdays {
+	display: none;
+}
+
+.effect_sms_body, .effect_notification_body {
+	height: 85px;
+	margin-top: 10px;
+}
+
+.div_effect_sms_body, .div_effect_notification_body {
+	margin-right: 10px;
+}
+
+.effect_ringer_vol_properties, .ringer_volume {
+	margin-top: 16px;
+}
+
+#intro_message {
+	margin-top: 28px;
+	border: dashed 1px silver;
+	height: 900px;
+/*	background: #DFDFD6;*/
+}
+
+#div_causes {
+	border-right: dashed 1px silver; 
+	height: 900px;
+}
+
+#div_effects {
+	height: 900px;
+}
+
+#causal_area {
+	display: none;
+}
+
+#btn_generate_onx {
+	text-decoration: none;
+	background-color: #30921E;
+	border-radius: 5px;
+	width: 120px;
+	text-align: center;
+}
+
+#btn_generate_onx a {
+	color: #FFF !important;
+}
+
+.schedule_datepicker {
+	background: #FFF;
+}
