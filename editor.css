@@ -63,6 +63,7 @@
 }
 
 .cause_properties {
+	height: 330px;
 	overflow: auto;
 }
 
@@ -94,4 +95,13 @@
 
 .schedule_weekdays {
 	display: none;
+}
+
+.effect_sms_body {
+	height: 85px;
+	margin-top: 10px;
+}
+
+.effect_ringer_vol_properties, .ringer_volume {
+	margin-top: 16px;
 }

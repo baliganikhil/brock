@@ -8,6 +8,16 @@ $('#btn_cause_sms_receive').live('click', add_cause_sms_receive);
 $('#btn_cause_battery_level').live('click', add_cause_battery_level);
 $('#btn_cause_unlock').live('click', add_cause_unlock);
 
+// Effects Toolbar
+$('#btn_effect_send_sms').live('click', add_effect_send_msg);
+$('#btn_effect_add_notification').live('click', add_effect_add_notification);
+$('#btn_effect_launch_app').live('click', add_effect_launch_app);
+$('#btn_effect_set_ringer').live('click', add_effect_set_ringer);
+$('#btn_effect_launch_browser').live('click', add_effect_launch_browser);
+$('#btn_effect_kill_app').live('click', add_effect_kill_app);
+
+// Some common code for points
+
 $('.edit_button').live('click', function() {
 	if($(this).closest('li').css("height") == "45px") {
 		$(this).closest('li').animate({height: "400px"});
@@ -27,7 +37,7 @@ $('.close_button').live('click', function() {
 
 // Causes
 
-function common_adder(icon, title, properies_html) {
+function common_adder(target, icon, title, properies_html) {
 	var point = "<div class='cause_point'>";
 	point += "<div class='cause_point_header row-fluid'>";
 
@@ -56,8 +66,8 @@ function common_adder(icon, title, properies_html) {
 	point = "<li class='each_cause' style='display: none'>" + point + "</li>";
 
 
-	$("#lst_causes").append(point);
-	$("#lst_causes").find('li:last').show('slide', {direction: "left"});
+	$("#" + target).append(point);
+	$("#" + target).find('li:last').show('slide', {direction: "left"});
 }
 
 $('.schedule_periodic').live('click', function() {
@@ -96,7 +106,7 @@ function add_cause_calendar() {
 
 	properties += "</table>";
 
-	common_adder('calendar.png', "Schedule", properties);
+	common_adder('lst_causes', 'calendar.png', "Schedule", properties);
 	$('.schedule_datepicker').datepicker();
 }
 
@@ -125,7 +135,7 @@ function add_cause_call_receive() {
 	qbeEnabled = false;
 
 	properties = "<div id=" + grid_id + "></div>";
-	common_adder('call.png', "Call Receive", properties);
+	common_adder('lst_causes', 'call.png', "Call Receive", properties);
 
     renderGrid({
 		"id": grid_id,
@@ -160,7 +170,7 @@ function add_cause_sms_receive() {
 
 	properties = "<div id=" + grid_id + "></div>";
 	properties += "<div>Contains: <input type='text'></div>";
-	common_adder('sms.png', "SMS Receive", properties);
+	common_adder('lst_causes', 'sms.png', "SMS Receive", properties);
 
     renderGrid({
 		"id": grid_id,
@@ -188,6 +198,36 @@ function add_cause_unlock() {
 // Effects
 
 function add_effect_send_msg() {
+	var curDate = new Date();
+	var ts = curDate.getTime();
+	var grid_id = "sms_from_" + ts;
+
+	var label = {"phone": "Phone"};
+
+	var data = null;
+
+    // We have added element types - instead of Read Only
+	var element_type = {
+		"phone": {"type":"text"}
+		};
+
+	qbeEnabled = false;
+
+	properties = "<div id=" + grid_id + "></div>";
+	properties += "<div>Message: <textarea class='effect_sms_body span12'></textarea></div>";
+	common_adder('lst_effects', 'send_sms.png', "Send SMS", properties);
+
+    renderGrid({
+		"id": grid_id,
+		"label": label,
+		"data": data,
+		"element_type": element_type,
+		"qbeEnabled": qbeEnabled,
+		"container": "table",
+		"addVisible": true,
+		"deleteVisible": true,
+		"actionButtonPosition":"line"
+	});
 
 }
 
@@ -200,6 +240,32 @@ function add_effect_launch_app() {
 }
 
 function add_effect_set_ringer() {
+	properties = "<div class='effect_ringer_vol_properties'><div class='effect_ringer_value'>5</div><div class='ringer_volume'></div></div>";
+	common_adder('lst_effects', 'ringer.png', "Ringer Volume", properties);
+
+	$('.ringer_volume').slider({
+			value:5,
+			min: 0,
+			max: 9,
+			step: 1,
+			slide: function( event, ui ) {
+		//		$( "#amount" ).val( "$" + ui.value );
+				switch(ui.value) {
+					case 0: 
+						$(this).closest('.effect_ringer_vol_properties').find('.effect_ringer_value').html('Silent');
+						break;
+
+					case 1:
+						$(this).closest('.effect_ringer_vol_properties').find('.effect_ringer_value').html('Vibrate');
+						break;
+
+					default:
+						$(this).closest('.effect_ringer_vol_properties').find('.effect_ringer_value').html(ui.value - 1);
+						break;
+				}
+
+			}
+		});
 
 }
 
