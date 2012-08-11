@@ -125,9 +125,13 @@ body {
 	display: none;
 }
 
-.effect_sms_body {
+.effect_sms_body, .effect_notification_body {
 	height: 85px;
 	margin-top: 10px;
+}
+
+.div_effect_sms_body, .div_effect_notification_body {
+	margin-right: 10px;
 }
 
 .effect_ringer_vol_properties, .ringer_volume {

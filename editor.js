@@ -196,7 +196,21 @@ function add_cause_sms_receive() {
 }
 
 function add_cause_battery_level() {
+	properties = "<div class='cause_battery_level_properties'><div class='cause_battery_level'>50</div><div class='battery_level'></div></div>";
+	common_adder('lst_causes', 'battery.png', "Battery Level", properties);
 
+	$('.battery_level').slider({
+		value:50,
+		min: 0,
+		max: 100,
+		step: 1,
+		slide: function( event, ui ) {
+	//		$( "#amount" ).val( "$" + ui.value );
+
+			$(this).closest('.cause_battery_level_properties').find('.cause_battery_level').html(ui.value);
+
+		}
+	});
 }
 
 function add_cause_unlock() {
@@ -224,8 +238,8 @@ function add_effect_send_msg() {
 	qbeEnabled = false;
 
 	properties = "<div id=" + grid_id + "></div>";
-	properties += "<div>Message: <textarea class='effect_sms_body span12'></textarea></div>";
-	common_adder('lst_effects', 'send_sms.png', "Send SMS", properties);
+	properties += "<div class='div_effect_sms_body'>Message: <textarea class='effect_sms_body span12'></textarea></div>";
+	common_adder('lst_effects', 'sms.png', "Send SMS", properties);
 
     renderGrid({
 		"id": grid_id,
@@ -242,7 +256,9 @@ function add_effect_send_msg() {
 }
 
 function add_effect_add_notification() {
+	var properties = "<div class='div_effect_notification_body'>Message: <textarea class='effect_notification_body span12'></textarea></div>";
 
+	common_adder('lst_effects', 'notification.png', "Notification", properties);
 }
 
 function add_effect_launch_app() {
@@ -284,13 +300,15 @@ function add_effect_launch_browser() {
 }
 
 function add_effect_kill_app() {
-
+	var properties = "";
+	common_adder('lst_effects', 'kill.png', "Kill running apps", properties);
 }
 
 //**************//
 // Actual Generation code begins
 $('#btn_generate_onx').live('click', function() {
 	var isValid = true;
+	$('#error_message').slideUp();
 
 	// First ensure that neither list is empty
 	if ($('li.each_cause').length === 0) {
@@ -329,6 +347,42 @@ $('#btn_generate_onx').live('click', function() {
 			default:
 		}
 	});
+
+	if (!isValid) {
+		return false;
+	}
+
+	// Go through effects
+	$('li.each_effect').each(function(key, value) {
+		var cur_type = $(this).data('cause_effect_type');
+
+		switch(cur_type) {
+			case 'Send SMS': isValid = validate_sms($(this));
+							if (!isValid) {
+								return false;
+							}
+
+							if (nullOrEmpty($(this).find('.effect_sms_body').val())) {
+								show_error_message("Please enter the SMS to be sent", $(this));
+								return false;
+							}
+					break;
+
+			case 'Ringer Volume': break;
+
+			case 'Notification': 
+
+							if (nullOrEmpty($(this).find('.effect_notification_body').val())) {
+								show_error_message("Please enter notification to be set", $(this));
+								return false;
+							}
+					break;
+
+			default:
+		}
+	});
+
+	
 
 	if (!isValid) {
 		return false;
@@ -380,6 +434,8 @@ function validate_phone(target) {
 function validate_sms(target) {
 	var isValid = true;
 	isValid = validate_phone(target);
+
+	return isValid;
 }
 
 function nullOrEmpty(target) {
