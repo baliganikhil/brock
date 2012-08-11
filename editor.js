@@ -32,12 +32,20 @@ $('.edit_button').live('click', function() {
 });
 
 $('.close_button').live('click', function() {
+	if ($('#lst_causes li').length + $('#lst_effects li').length - 1 === 0) {
+		$('#main_screen').fadeIn();
+	}
+
 	$(this).closest('li').fadeOut(200, function() {$(this).remove();});
 });
 
 // Causes
 
 function common_adder(target, icon, title, properies_html) {
+	$('#main_screen').hide();
+	$('#div_causes').show();
+	$('#div_effects').show();
+
 	var point = "<div class='cause_point'>";
 	point += "<div class='cause_point_header row-fluid'>";
 
