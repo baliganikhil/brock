@@ -423,12 +423,25 @@ function validate_schedule(target) {
 
 function validate_phone(target) {
 	var non_empty_count = 0;
-	$(target).find('.eachRow .phone').each(function() {
-		if (!nullOrEmpty($(this).val())) {
+	var phone_exp = /^[0-9]{10}$/;
+	var isValid = true;
+
+	$(target).find('.eachRow').each(function() {
+		var cur_phone = $(this).find('.phone').val();
+		if (!nullOrEmpty(cur_phone)) {
+			if (!phone_exp.test(cur_phone)) {
+				show_error_message ("Invalid phone number found", target);
+				isValid = false;
+				return false;
+			}
 			non_empty_count += 1;
 		}
 		
 	});
+
+	if (!isValid) {
+		return false;
+	}
 
 	if (non_empty_count === 0) {
 		show_error_message ("You haven't entered any phone numbers", target);
