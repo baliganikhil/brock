@@ -1,5 +1,5 @@
 body {
-	/*background: url('images/yahoo_wp.jpg');*/
+	background: url('images/yahoo_wp.jpg');
 }
 
 #brock_body {
@@ -142,6 +142,7 @@ body {
 	margin-top: 28px;
 	border: dashed 1px silver;
 	height: 900px;
+	background: #DFDFD6;
 }
 
 #div_causes {
