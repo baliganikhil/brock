@@ -71,7 +71,7 @@ function common_adder(target, icon, title, properies_html) {
 	point += "</div>";
 	point += "</div>";
 
-	point = "<li class='each_cause' style='display: none'>" + point + "</li>";
+	point = "<li class='each_cause' data-cause_effect_type='" + title + "' style='display: none'>" + point + "</li>";
 
 
 	$("#" + target).append(point);
@@ -92,18 +92,18 @@ function toggle_scheduler(hello) {
 }
 
 function add_cause_calendar() {
-	var properties = "<div class='btn-group' data-toggle='buttons-radio'><button class='btn btn-success active schedule_once'>Once</button><button class='btn btn-danger schedule_periodic'>Periodic</button></div> ";
+	var properties = "<div class='btn-group' data-toggle='buttons-radio'><button data-value='once' class='btn btn-success active schedule_once'>Once</button><button data-value='periodic' class='btn btn-inverse schedule_periodic'>Periodic</button></div> ";
 	properties += "<table class='table table-bordered'>";
 //	properties += "<tr>";
 //	properties += "<th> <input type='radio' checked name='" + ts + "'> Once </th><th><input type='radio' name='" + ts + "'> Periodic </th>";
 //	properties += "</tr>";
 
 	properties += "<tr class='schedule_date'>";
-	properties += "<th>Date</th><td><input type='text' class='schedule_datepicker'></td>";
+	properties += "<th>Date</th><td><input type='text' class='schedule_datepicker' readonly='readonly'></td>";
 	properties += "</tr>";
 
 	properties += "<tr class='schedule_time'>";
-	properties += "<th>Time</th><td><input type='text' class='span2' style='float: left'> <input type='text' class='span2'></td>";
+	properties += "<th>Time</th><td><input type='text' class='span2 hour' style='float: left'> <input type='text' class='span2 minute'> (HH - MM) 24 hour format</td>";
 	properties += "</tr>";
 
 	properties += "<tr class='schedule_weekdays'>";
@@ -199,7 +199,8 @@ function add_cause_battery_level() {
 }
 
 function add_cause_unlock() {
-
+	var properties = "";
+	common_adder('lst_causes', 'unlock.png', "Unlock", properties);
 }
 
 
@@ -284,3 +285,119 @@ function add_effect_launch_browser() {
 function add_effect_kill_app() {
 
 }
+
+//**************//
+// Actual Generation code begins
+$('#btn_generate_onx').live('click', function() {
+	var isValid = true;
+
+	// Go through causes
+	$('li.each_cause').each(function(key, value) {
+		var cur_type = $(this).data('cause_effect_type');
+
+		switch(cur_type) {
+			case 'Schedule': isValid = validate_schedule($(this));
+							if (!isValid) {
+								return false;
+							}
+				break;
+
+			case 'Call Receive': isValid = validate_phone($(this));
+							if (!isValid) {
+								return false;
+							}
+					break;
+
+			case 'SMS Receive': isValid = validate_sms($(this));
+							if (!isValid) {
+								return false;
+							}
+					break;
+
+			default:
+		}
+	});
+
+	if (!isValid) {
+		return false;
+	}
+});
+
+
+function validate_schedule(target) {
+	var once_periodic = $(target).find('.btn-group').find('button.active');
+
+	if (nullOrEmpty($(target).find('.hour').val()) || nullOrEmpty($(target).find('.minute').val())) {
+		show_error_message ("You haven't mentioned the time.", target);
+		
+		return false;
+	}
+
+	if ($(once_periodic).data('value') == 'once') {
+		if (nullOrEmpty($(target).find('.schedule_datepicker').val())) {
+			show_error_message ("You haven't mentioned the date", target);
+			return false;
+		}
+
+	} else {
+		if ($(target).find('input:checkbox:checked').length === 0) {
+			show_error_message ("You haven't selected any weekday", target);
+			return false;
+		}
+	}
+
+}
+
+function validate_phone(target) {
+	var non_empty_count = 0;
+	$(target).find('.eachRow .phone').each(function() {
+		if (!nullOrEmpty($(this).val())) {
+			non_empty_count += 1;
+		}
+		
+	});
+
+	if (non_empty_count === 0) {
+		show_error_message ("You haven't entered any phone numbers", target);
+		return false;
+	} else {
+		return true;
+	}
+}
+
+function validate_sms(target) {
+	var isValid = true;
+	isValid = validate_phone(target);
+}
+
+function nullOrEmpty(target) {
+	if (target === null || target === "" || target === undefined) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function expand_causal_point(target) {
+	$(target).animate({height: "400px"});
+	$(target).find('.cause_properties').show();
+	$(target).find('i.icon-pencil').removeClass('icon-pencil').addClass('icon-minus');
+}
+
+function show_error_message(message, target) {
+	$("#actual_error_message").html(message);
+	$('#error_message').slideDown();
+
+	expand_causal_point($(target));
+}
+
+$('#close_error_message').live('click', function() {
+	$('#error_message').slideUp();
+});
+
+
+$(document).ready(function() {
+	$('.toolbar_icon').each(function() {
+		$(this).popover();
+	});
+});

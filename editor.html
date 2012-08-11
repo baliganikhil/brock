@@ -8,6 +8,9 @@
 	<script type="text/javascript" src="js/jquery-ui-1.8.22.custom.min.js"></script>
 	<script type="text/javascript" src="editor.js"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="js/bootstrap-alert.js"></script>
+	<script type="text/javascript" src="js/bootstrap-tooltip.js"></script>
+	<script type="text/javascript" src="js/bootstrap-popover.js"></script>
 	<script type="text/javascript" src="grid.js"></script>
 </head>
 
@@ -37,6 +40,14 @@
 
 <div class="container-fluid" id="brock_body">
 
+	<div class="alert alert-block alert-error fade in" id="error_message">
+	    <button type="button" class="close" data-dismiss="alert">×</button>
+	    <h4 class="alert-heading">Oops! You got an error!</h4>
+	    <p id="actual_error_message"></p>
+	    <p>
+	      <a class="btn btn-danger" href="#" id="close_error_message">Ok, got it!</a>
+	    </p>
+  	</div>
 
 
 	<div class="row-fluid">
@@ -44,14 +55,21 @@
 		<div class="span1">
 
 			<p>&nbsp;</p>
-			<div class="toolbar_icon" id="btn_cause_calendar"><img src="images/calendar.png"></div>
-			<div class="toolbar_icon" id="btn_cause_call_receive"><img src="images/call.png"></div>
-			<div class="toolbar_icon" id="btn_cause_sms_receive"><img src="images/sms.png"></div>
-			<div class="toolbar_icon" id="btn_cause_weather"><img src="images/weather.png"></div>
-			<div class="toolbar_icon" id="btn_cause_location"><img src="images/gps.png"></div>
-			<div class="toolbar_icon" id="btn_cause_battery_level"><img src="images/battery.png"></div>
-			<div class="toolbar_icon" id="btn_cause_moving"><img src="images/moving.png"></div>
-			<div class="toolbar_icon" id="btn_cause_unlock"></div>
+			<div class="toolbar_icon" id="btn_cause_calendar" rel="popover" data-content="Set stuff to run at a particular date or weekday" data-original-title="Scheduler"><img src="images/calendar.png"></div>
+
+			<div class="toolbar_icon" id="btn_cause_call_receive" rel="popover" data-content="Set stuff to run when you receive a call from any of the set numbers" data-original-title="Call Receive"><img src="images/call.png"></div>
+
+			<div class="toolbar_icon" id="btn_cause_sms_receive" rel="popover" data-content="Set stuff to run when you receive an SMS" data-original-title="SMS Receive"><img src="images/sms.png"></div>
+
+			<div class="toolbar_icon" id="btn_cause_weather" rel="popover" data-content="Do stuff depending on the weather condition" data-original-title="Weather Forecast"><img src="images/weather.png"></div>
+
+			<div class="toolbar_icon" id="btn_cause_location" rel="popover" data-content="Do something when you enter or leave a place" data-original-title="Location aware"><img src="images/gps.png"></div>
+
+			<div class="toolbar_icon" id="btn_cause_battery_level" rel="popover" data-content="Do something depending on your battery status" data-original-title="Battery status"><img src="images/battery.png"></div>
+
+			<div class="toolbar_icon" id="btn_cause_moving" rel="popover" data-content="Do something when you start moving (vehicle)" data-original-title="Movement aware"><img src="images/moving.png"></div>
+
+			<div class="toolbar_icon" id="btn_cause_unlock" rel="popover" data-content="Do something as soon as you unlock your phone" data-original-title="Unlock"><img src="images/unlock.png"></div>
 
 		</div>
 

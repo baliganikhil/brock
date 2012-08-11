@@ -1,5 +1,14 @@
+body {
+	/*background: url('images/yahoo_wp.jpg');*/
+}
+
 #brock_body {
 	margin-top: 30px;
+}
+
+#error_message {
+	margin-top: 30px;
+	display: none;
 }
 
 .toolbar_icon {
@@ -11,6 +20,18 @@
 	box-shadow: 1px 1px 1px silver;
 */
 	margin-top: 5px;
+}
+
+.toolbar_icon img {
+	box-shadow: 3px 3px 3px silver;
+	border-radius: 10px;
+}
+
+.toolbar_icon img:hover {
+	box-shadow: 3px 3px 3px white;
+	border-radius: 10px;
+	margin-top: 3px;
+	margin-left: 3px;
 }
 
 #lst_causes, #lst_effects {
@@ -115,12 +136,12 @@
 
 #intro_message {
 	margin-top: 28px;
-	border: dashed 5px silver;
+	border: dashed 1px silver;
 	height: 900px;
 }
 
 #div_causes {
-	border-right: dashed 5px silver; 
+	border-right: dashed 1px silver; 
 	height: 900px;
 }
 
@@ -142,4 +163,8 @@
 
 #btn_generate_onx a {
 	color: #FFF !important;
+}
+
+.schedule_datepicker {
+	background: #FFF;
 }
