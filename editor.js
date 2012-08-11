@@ -19,12 +19,12 @@ $('#btn_effect_kill_app').live('click', add_effect_kill_app);
 // Some common code for points
 
 $('.edit_button').live('click', function() {
-	if($(this).closest('li').css("height") == "45px") {
+	if($(this).closest('li').css("height") == "90px") {
 		$(this).closest('li').animate({height: "400px"});
 		$(this).closest('.cause_point').find('.cause_properties').show();
 		$(this).find('i').removeClass('icon-pencil').addClass('icon-minus');
 	} else {
-		$(this).closest('li').animate({height: "45px"});
+		$(this).closest('li').animate({height: "90px"});
 		$(this).closest('.cause_point').find('.cause_properties').hide();
 		$(this).find('i').removeClass('icon-minus').addClass('icon-pencil');
 	}
@@ -34,6 +34,7 @@ $('.edit_button').live('click', function() {
 $('.close_button').live('click', function() {
 	if ($('#lst_causes li').length + $('#lst_effects li').length - 1 === 0) {
 		$('#main_screen').fadeIn();
+		$('#causal_area').hide();
 	}
 
 	$(this).closest('li').fadeOut(200, function() {$(this).remove();});
@@ -43,14 +44,13 @@ $('.close_button').live('click', function() {
 
 function common_adder(target, icon, title, properies_html) {
 	$('#main_screen').hide();
-	$('#div_causes').show();
-	$('#div_effects').show();
+	$('#causal_area').show();
 
 	var point = "<div class='cause_point'>";
 	point += "<div class='cause_point_header row-fluid'>";
 
 	// Icon
-	point += "<div class='cause_icon' style='background: url(\"images/" + icon + "\") no-repeat'></div>";
+	point += "<div style='float: left;'><img src='images/" + icon + "' style='height: 75px; width: 75px;'></div>";
 
 	point += "<div class='cause_title'>";
 
