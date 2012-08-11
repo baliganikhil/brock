@@ -60,12 +60,29 @@ function common_adder(icon, title, properies_html) {
 	$("#lst_causes").find('li:last').show('slide', {direction: "left"});
 }
 
-function add_cause_calendar() {
-	var properties = "<table class='table table-bordered'>";
+$('.schedule_periodic').live('click', function() {
+	toggle_scheduler($(this));
+});
 
-	properties += "<tr>";
-	properties += "<th> <input type='radio' checked> Once </th><th><input type='radio'> Periodic </th>";
-	properties += "</tr>";
+$('..schedule_once').live('click', function() {
+	toggle_scheduler($(this));
+});
+
+function toggle_scheduler(hello) {
+	$(hello).closest('.cause_properties').find('.schedule_weekdays').toggle();
+	$(hello).closest('.cause_properties').find('.schedule_date').toggle();
+}
+
+function add_cause_calendar() {
+	
+	var curDate = new Date();
+	var ts = curDate.getTime();
+
+	var properties = "<div class='btn-group' data-toggle='buttons-radio'><button class='btn btn-success active schedule_once'>Once</button><button class='btn btn-danger schedule_periodic'>Periodic</button></div> ";
+	properties += "<table class='table table-bordered'>";
+//	properties += "<tr>";
+//	properties += "<th> <input type='radio' checked name='" + ts + "'> Once </th><th><input type='radio' name='" + ts + "'> Periodic </th>";
+//	properties += "</tr>";
 
 	properties += "<tr class='schedule_date'>";
 	properties += "<th>Date</th><td><input type='text' class='schedule_datepicker'></td>";
@@ -96,6 +113,33 @@ function add_cause_moving() {
 }
 
 function add_cause_call_receive() {
+
+	var label = {"phone": "Phone"};
+
+	var data = null;
+
+    // We have added element types - instead of Read Only
+	var element_type = {
+		"phone": {"type":"text"}
+		};
+
+	qbeEnabled = false;
+
+    renderGrid({
+		"id": "myGrid",
+		"label": label,
+		"data": data,
+		"element_type": element_type,
+		"qbeEnabled": qbeEnabled,
+		"container": "table",
+		"addVisible": true,
+		"deleteVisible": true,
+		"actionButtonPosition":"line"
+	});
+
+	properties = "";
+
+	common_adder('call.png', "Call Receive", properties);
 
 }
 
