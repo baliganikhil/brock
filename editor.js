@@ -61,7 +61,30 @@ function common_adder(icon, title, properies_html) {
 }
 
 function add_cause_calendar() {
-	common_adder('calendar.png', "schedule", "Dude!");
+	var properties = "<table class='table table-bordered'>";
+
+	properties += "<tr>";
+	properties += "<th> <input type='radio' checked> Once </th><th><input type='radio'> Periodic </th>";
+	properties += "</tr>";
+
+	properties += "<tr class='schedule_date'>";
+	properties += "<th>Date</th><td><input type='text' class='schedule_datepicker'></td>";
+	properties += "</tr>";
+
+	properties += "<tr class='schedule_time'>";
+	properties += "<th>Time</th><td><input type='text' class='span2' style='float: left'> <input type='text' class='span2'></td>";
+	properties += "</tr>";
+
+	properties += "<tr class='schedule_weekdays'>";
+	properties += "<th>Weekdays</th><td><label class='checkbox'><input type='checkbox' value='Monday'>Monday</label><label class='checkbox'><input type='checkbox' value='Tuesday'>Tuesday</label><label class='checkbox'><input type='checkbox' value='Wednesday'>Wednesday</label><label class='checkbox'><input type='checkbox' value='Thursday'>Thursday</label><label class='checkbox'><input type='checkbox' value='Friday'>Friday</label><label class='checkbox'><input type='checkbox' value='Saturday'>Saturday</label><label class='checkbox'><input type='checkbox' value='Sunday'>Sunday</label></select></td>";
+	properties += "</tr>";
+
+	
+
+	properties += "</table>";
+
+	common_adder('calendar.png', "Schedule", properties);
+	$('.schedule_datepicker').datepicker();
 }
 
 function add_cause_location(in_out, latlong, range) {
