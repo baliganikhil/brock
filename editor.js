@@ -76,7 +76,14 @@ function common_adder(target, icon, title, properies_html) {
 
 
 	$("#" + target).append(point);
-	$("#" + target).find('li:last').show('slide', {direction: "left"});
+	$("#" + target).find('li:last').fadeIn("1500");	
+
+	// if (target == 'lst_causes') {
+	// 	$("#" + target).find('li:last').show('slide', {direction: "left"});	
+	// } else {
+	// 	$("#" + target).find('li:last').show('slide', {direction: "right"});
+	// }
+	
 }
 
 $('.schedule_periodic').live('click', function() {
