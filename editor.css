@@ -105,3 +105,9 @@
 .effect_ringer_vol_properties, .ringer_volume {
 	margin-top: 16px;
 }
+
+#intro_message {
+	margin-top: 28px;
+	border: dashed 5px silver;
+	height: 900px;
+}
