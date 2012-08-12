@@ -405,6 +405,7 @@ $('#btn_generate_onx').live('click', function() {
 							phone_numbers = isValid[params][0];
 
 							var sms_words = $(this).find('.sms_words').val();
+							sms_words = sms_words.split(",");
 
 							cause_command.push({"name": "handle_sms", "params": ['smsReceived', phone_numbers, sms_words]});
 
