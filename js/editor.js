@@ -376,7 +376,8 @@ $('#btn_generate_onx').live('click', function() {
 							}
 					break;
 
-			case 'Ringer Volume': break;
+			case 'Ringer Volume': effect_command.push({"name": "setRinger", "params": [$(this).find('.ringer_volume').slider("value")]});
+							break;
 
 			case 'Notification':
 							var notification_msg = $(this).find('.effect_notification_body').val();
