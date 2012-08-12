@@ -399,6 +399,13 @@ $('#btn_generate_onx').live('click', function() {
 							if (isValid === false) {
 								return false;
 							}
+
+							// { "name": "sendSMS", "params": [phone_numbers, sms_body] }
+
+							phone_numbers = isValid[params][0];
+
+
+
 					break;
 
 			case 'Unlock': cur_type = $(this).find('.unlock_properties').val();
