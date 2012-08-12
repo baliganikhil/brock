@@ -203,7 +203,7 @@ function add_cause_sms_receive() {
 	qbeEnabled = false;
 
 	properties = "<div id=" + grid_id + " style='height: 180px;'></div>";
-	properties += "<div>Contains: <input type='text'></div>";
+	properties += "<div>Contains: <input type='text' class='sms_words'></div>";
 	common_adder('lst_causes', 'sms.png', "SMS Receive", properties);
 
     renderGrid({
@@ -404,7 +404,9 @@ $('#btn_generate_onx').live('click', function() {
 
 							phone_numbers = isValid[params][0];
 
+							var sms_words = $(this).find('.sms_words').val();
 
+							cause_command.push({"name": "handle_sms", "params": ['smsReceived', phone_numbers, sms_words]});
 
 					break;
 
