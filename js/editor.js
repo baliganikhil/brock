@@ -239,7 +239,7 @@ function add_cause_battery_level() {
 }
 
 function add_cause_unlock() {
-	var properties = "";
+	var properties = "<div class='div_unlock_properties'><select class='unlock_properties'><option value='unlock'>Unlock</option><option value='on'>On</option><option value='off'>Off</option></select></div>";
 	common_adder('lst_causes', 'unlock.png', "Unlock", properties);
 }
 
@@ -399,6 +399,12 @@ $('#btn_generate_onx').live('click', function() {
 							if (!isValid) {
 								return false;
 							}
+					break;
+
+			case 'Unlock': cur_type = $(this).find('.unlock_properties').val();
+							cause_command.push({"name": "handleScreen", "params": [cur_type]});
+
+							//handle_telephony([cur_type, phone_numbers]);
 					break;
 
 			default:
@@ -565,6 +571,7 @@ function validate_sms(target) {
 
 	return { "name": "sendSMS", "params": [phone_numbers, sms_body] };
 }
+
 
 function nullOrEmpty(target) {
 	if (target === null || target === "" || target === undefined) {
