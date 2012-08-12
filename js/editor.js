@@ -163,7 +163,7 @@ function add_cause_call_receive() {
 
 	qbeEnabled = false;
 
-	properties = "<div><select class='call_status'><option value='idle'>Idle</option><option value='busy'>On Call</option></select></div>";
+	properties = "<div><select class='call_status'><option value='incomingCall'>Incoming</option><option value='busy'>On Call</option></select></div>";
 	properties += "<div id=" + grid_id + "></div>";
 	common_adder('lst_causes', 'call.png', "Incoming Call", properties);
 
@@ -380,6 +380,11 @@ $('#btn_generate_onx').live('click', function() {
 							if (isValid === false) {
 								return false;
 							}
+
+							var phone_numbers = isValid;
+							cur_type = $(this).find('.call_status').val();
+
+							handle_telephony([cur_type, phone_numbers]);
 					break;
 
 			case 'SMS Receive': isValid = validate_sms($(this));
@@ -514,7 +519,7 @@ function validate_phone(target) {
 		return false;
 	} else {
 		$(target).find('.grid_table .eachRow .phone').each(function() {
-			phone_numbers.push($(this).val());
+			phone_numbers.push("+91" + $(this).val());
 		});
 
 		return phone_numbers;
