@@ -1,15 +1,9 @@
 //[ [{"name": "createTimer", "params": [ 'test', [2012,07,12,4,10], [3,6] ]}], [ { "name": "showNotification", "params": ["Hello Amod"] } ] ]
 
 function cause_creator( data ) {
-	var source = "";
-
 	// This has to be first
 
-	$.each( data[ 1 ], function( index, cause ) {
-
-		source += effect_creator( cause[ "name" ], cause[ "callbacks" ] );
-
-	});
+	source = effect_creator( data[ 1 ] );
 
 	$.each( data[ 0 ], function( index, cause ) {
 
@@ -20,7 +14,7 @@ function cause_creator( data ) {
 	console.log( source );
 }
 
-function effect_creator( name, data ) {
+function effect_creator( data ) {
 	var source = "";
 	$.each( data, function( index, effect ) {
 		source += eval( effect[ "name" ] )( effect[ "params" ] );
