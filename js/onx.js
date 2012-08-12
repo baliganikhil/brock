@@ -52,15 +52,17 @@ function handle_sms( params ) {
 			"if ( ", JSON.stringify( params[1] ), ".indexOf( sms.from ) > -1 ) {",
 				"if ( ",JSON.stringify( params[2] ), " && " , params[2].length, " > 0 ) {",
 					"for ( var index in ", JSON.stringify( params[2] ), " ) {",
-						"if ( sms.body.search(", JSON.stringify( params[2] ), "[index] ) > -1 ) {",
+						"if ( sms.body.toLowerCase().search((", JSON.stringify( params[2] ), "[index]).toLowerCase() ) > -1 ) {",
 							"user.number = sms.from;",
 							"callback();",
 						"}",
 					"}",
+				"} else {",
+					"callback();",
 				"}",
 			"}",
 		"}",
-	"};"
+	"});"
 	].join("") + "\n";
 
 	return ret;
@@ -184,6 +186,28 @@ function launchApp( params ) {
 	"function launchApp() {",
 		"device.applications.launch('",params[ 0 ],"');",
 	"}"].join("") + "\n";
+
+    return ret;
+}
+
+function getLocation( params ) {
+
+signal.location.latitude);
+ console.info('Lon: ' + signal.location.longitude
+
+	var ret = [
+	"function getLocation() {",
+		"device.messaging.sendSms({",
+		     "'to': '", numbers[ index ] ,"', ",
+		     "'body': '", params[ 1 ],"'",
+		"},",
+		"function (err) {",
+		     "console.log(err || 'sms was sent successfully');",
+		"}",
+		");"
+	"}"].join("") + "\n";
+
+	].join("");
 
     return ret;
 }

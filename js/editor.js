@@ -181,7 +181,7 @@ function add_cause_call_receive() {
 		"actionButtonPosition":"line"
 	});
 
-	
+
 
 
 }
@@ -402,7 +402,7 @@ $('#btn_generate_onx').live('click', function() {
 
 							// { "name": "sendSMS", "params": [phone_numbers, sms_body] }
 
-							phone_numbers = isValid[params][0];
+							phone_numbers = isValid["params"][0];
 
 							var sms_words = $(this).find('.sms_words').val();
 							sms_words = sms_words.split(",");
@@ -572,9 +572,8 @@ function validate_sms(target) {
 
 		phone_numbers = isValid;
 
-		
 	} else {
-		phone_numbers.push('sender');
+		//phone_numbers.push('sender');
 	}
 
 	sms_body = $(target).find('.effect_sms_body').val();
