@@ -23,7 +23,7 @@ function effect_creator( data ) {
 	var functions = "function callback() {";
 	$.each( data, function( index, effect ) {
 		var func = [
-			effect[ "name" ],"();",
+			effect[ "name" ],"();"
 		].join("") + "\n";
 
 		functions += func;
@@ -83,4 +83,34 @@ function createTimer( params ) {
 	].join("") + "\n";
 
 	return ret;
+}
+
+function setRinger( params ) {
+	var ret = [
+	"function setRinger() {",
+		"device.audio.ringerVolume = ",parseInt(params[ 0 ], 10),
+	"}"].join("") + "\n";
+
+    return ret;
+}
+
+function sendSMS( params ) {
+	var ret = "function sendSMS() {";
+		var numbers = params[ 0 ];
+
+		for (var index in numbers) {
+
+			ret += ["device.messaging.sendSms({",
+			     "'to': '", numbers[ index ] ,"', ",
+			     "'body': '", params[ 1 ],"'",
+			 "},",
+			 "function (err) {",
+			     "console.log(err || 'sms was sent successfully');",
+			 "}",
+			");"].join("");
+		}
+
+	ret += "} \n";
+
+    return ret;
 }
