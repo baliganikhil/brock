@@ -145,17 +145,17 @@ body {
 #intro_message {
 	margin-top: 28px;
 	border: dashed 1px silver;
-	height: 900px;
+	height: 700px;
 /*	background: #DFDFD6;*/
 }
 
 #div_causes {
 	border-right: dashed 1px silver; 
-	height: 900px;
+	height: 700px;
 }
 
 #div_effects {
-	height: 900px;
+	height: 700px;
 }
 
 #causal_area {
@@ -181,4 +181,8 @@ body {
 #generated_code {
 	width: 500px;
 	height: 300px;
+}
+
+.properties_header {
+	margin-top: 30px;
 }

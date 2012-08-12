@@ -121,8 +121,26 @@ function add_cause_calendar() {
 	$('.schedule_datepicker').datepicker({"dateFormat": "dd/mm/yy"});
 }
 
-function add_cause_location(in_out, latlong, range) {
+function add_cause_location() {
 
+	var properties = "<table class='table table-bordered'>";
+
+	properties += "<tr class='latitude'>";
+	properties += "<th>Latitude</th><td><input type='text' class='latitude'></td>";
+	properties += "</tr>";
+
+	properties += "<tr class='longitude'>";
+	properties += "<th>Longitude</th><td><input type='text' class='longitude'></td>";
+	properties += "</tr>";
+
+	properties += "<tr class='range'>";
+	properties += "<th>Range (m)</th><td><input type='text' class='range'></td>";
+	properties += "</tr>";
+
+	properties += "</table>";
+
+
+	common_adder('lst_causes', 'gps.png', "GPS Position", properties);
 }
 
 function add_cause_moving() {
@@ -310,7 +328,8 @@ function add_effect_set_ringer() {
 }
 
 function add_effect_launch_browser() {
-
+	var properties = "<div class='properties_header'><h4>Site / URL</h4><input type='text' class='url' style='height: 30px; width: 400px;'></div>";
+	common_adder('lst_effects', 'browser.png', "Launch Browser", properties);
 }
 
 function add_effect_kill_app() {
@@ -319,7 +338,7 @@ function add_effect_kill_app() {
 }
 
 function add_effect_launch_app() {
-	var properties = "<div><h4>App Name</h4><input type='text' class='app_name' style='height: 30px;'></div>";
+	var properties = "<div class='properties_header'><h4>App Name</h4><input type='text' class='app_name' style='height: 30px;'></div>";
 	common_adder('lst_effects', 'launcher.png', "Launch App", properties);
 }
 
