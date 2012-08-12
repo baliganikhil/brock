@@ -402,7 +402,7 @@ $('#btn_generate_onx').live('click', function() {
 					break;
 
 			case 'Unlock': cur_type = $(this).find('.unlock_properties').val();
-							cause_command.push({"name": "handleScreen", "params": [cur_type]});
+							cause_command.push({"name": "handle_screen", "params": [cur_type]});
 
 							//handle_telephony([cur_type, phone_numbers]);
 					break;
