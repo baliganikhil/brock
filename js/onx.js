@@ -34,6 +34,38 @@ function effect_creator( data ) {
 
 // EVENT
 
+function handle_screen( params ) {
+	var ret = [
+		"device.screen.on('", params[0] ,"', callback() );"
+	].join("") + "\n";
+
+	return ret;
+}
+
+function handle_sms( params ) {
+
+	var ret = [
+	"var user = {number: ''};",
+	"device.messaging.on('", params[0] ,"', function (sms)",
+	"{",
+		"if ( ",JSON.stringify( params[1] ), " && " , params[1].length, " > 0 ) {",
+			"if ( ", JSON.stringify( params[1] ), ".indexOf( sms.from ) > -1 ) {",
+				"if ( ",JSON.stringify( params[2] ), " && " , params[2].length, " > 0 ) {",
+					"for ( var index in ", JSON.stringify( params[2] ), " ) {",
+						"if ( sms.body.search(", JSON.stringify( params[2] ), "[index] ) > -1 ) {",
+							"user.number = sms.from;",
+							"callback();",
+						"}",
+					"}",
+				"}",
+			"}",
+		"}",
+	"};"
+	].join("") + "\n";
+
+	return ret;
+}
+
 function handle_telephony( params ) {
 	var ret = [
 	"var user = {number: ''};",
@@ -116,19 +148,31 @@ function setRinger( params ) {
 
 function sendSMS( params ) {
 	var ret = "function sendSMS() {";
-		var numbers = params[ 0 ];
+	var numbers = params[ 0 ];
 
-		for (var index in numbers) {
+	for (var index in numbers) {
 
-			ret += ["device.messaging.sendSms({",
-			     "'to': '", numbers[ index ] ,"', ",
+		ret += ["device.messaging.sendSms({",
+		     "'to': '", numbers[ index ] ,"', ",
+		     "'body': '", params[ 1 ],"'",
+		 "},",
+		 "function (err) {",
+		     "console.log(err || 'sms was sent successfully');",
+		 "}",
+		");"].join("");
+	}
+
+	ret +=	[
+	"if ( user.number ) {",
+		"device.messaging.sendSms({",
+			     "'to': user.number, ",
 			     "'body': '", params[ 1 ],"'",
 			 "},",
 			 "function (err) {",
 			     "console.log(err || 'sms was sent successfully');",
 			 "}",
-			");"].join("");
-		}
+			");",
+	"}"].join("");
 
 	ret += "} \n";
 
