@@ -115,7 +115,7 @@ function add_cause_calendar() {
 	properties += "</tr>";
 
 	properties += "<tr class='schedule_weekdays'>";
-	properties += "<th>Weekdays</th><td><label class='checkbox'><input type='checkbox' value='Monday'>Monday</label><label class='checkbox'><input type='checkbox' value='Tuesday'>Tuesday</label><label class='checkbox'><input type='checkbox' value='Wednesday'>Wednesday</label><label class='checkbox'><input type='checkbox' value='Thursday'>Thursday</label><label class='checkbox'><input type='checkbox' value='Friday'>Friday</label><label class='checkbox'><input type='checkbox' value='Saturday'>Saturday</label><label class='checkbox'><input type='checkbox' value='Sunday'>Sunday</label></select></td>";
+	properties += "<th>Weekdays</th><td><label class='checkbox'><input type='checkbox' value='1'>Monday</label><label class='checkbox'><input type='checkbox' value='2'>Tuesday</label><label class='checkbox'><input type='checkbox' value='3'>Wednesday</label><label class='checkbox'><input type='checkbox' value='4'>Thursday</label><label class='checkbox'><input type='checkbox' value='5'>Friday</label><label class='checkbox'><input type='checkbox' value='6'>Saturday</label><label class='checkbox'><input type='checkbox' value='0'>Sunday</label></select></td>";
 	properties += "</tr>";
 
 	
@@ -314,6 +314,8 @@ function add_effect_kill_app() {
 //**************//
 // Actual Generation code begins
 $('#btn_generate_onx').live('click', function() {
+	var cause_command = [];
+	var effect_command = [];
 	var isValid = true;
 	$('#error_message').slideUp();
 
@@ -331,11 +333,14 @@ $('#btn_generate_onx').live('click', function() {
 	// Go through causes
 	$('li.each_cause').each(function(key, value) {
 		var cur_type = $(this).data('cause_effect_type');
+		
 
 		switch(cur_type) {
 			case 'Schedule': isValid = validate_schedule($(this));
-							if (!isValid) {
+							if (isValid === false) {
 								return false;
+							} else {
+								cause_command.push(isValid);
 							}
 				break;
 
@@ -377,11 +382,14 @@ $('#btn_generate_onx').live('click', function() {
 
 			case 'Ringer Volume': break;
 
-			case 'Notification': 
+			case 'Notification':
+							var notification_msg = $(this).find('.effect_notification_body').val();
 
-							if (nullOrEmpty($(this).find('.effect_notification_body').val())) {
+							if (nullOrEmpty(notification_msg)) {
 								show_error_message("Please enter notification to be set", $(this));
 								return false;
+							} else {
+								effect_command.push({ "name": "showNotification", "params": [notification_msg] });
 							}
 					break;
 
@@ -394,22 +402,38 @@ $('#btn_generate_onx').live('click', function() {
 	if (!isValid) {
 		return false;
 	}
+
+	console.log(JSON.stringify([cause_command, effect_command]));
+	cause_creator([cause_command, effect_command]);
 });
 
 
 function validate_schedule(target) {
 	var once_periodic = $(target).find('.btn-group').find('button.active');
+	var curHour = $(target).find('.hour').val();
+	var curMin = $(target).find('.minute').val();
 
-	if (nullOrEmpty($(target).find('.hour').val()) || nullOrEmpty($(target).find('.minute').val())) {
+	var curDate = "";
+	var curMonth = "";
+	var curYear = "";
+
+	var curWeek = [];
+
+	if (nullOrEmpty(curHour) || nullOrEmpty(curMin)) {
 		show_error_message ("You haven't mentioned the time.", target);
-		
 		return false;
 	}
 
 	if ($(once_periodic).data('value') == 'once') {
-		if (nullOrEmpty($(target).find('.schedule_datepicker').val())) {
+		curDate = $(target).find('.schedule_datepicker').val();
+		if (nullOrEmpty(curDate)) {
 			show_error_message ("You haven't mentioned the date", target);
 			return false;
+		} else {
+			curDate = curDate.split("/");
+			curYear = curDate[2];
+			curMonth = curDate[1];
+			curDate = curDate[0];
 		}
 
 	} else {
@@ -417,7 +441,14 @@ function validate_schedule(target) {
 			show_error_message ("You haven't selected any weekday", target);
 			return false;
 		}
+
+		$(target).find('input:checkbox:checked').each(function(key, value) {
+			curWeek.push($(this).val());
+		});
 	}
+
+	var return_value = {"name": "createTimer", "params": [ 'test', [curYear, curMonth, curDate, curHour, curMin], curWeek ]};
+	return return_value;
 
 }
 
@@ -492,3 +523,9 @@ $(document).ready(function() {
 		$(this).popover();
 	});
 });
+
+function prepare_command() {
+	//[ {"name": "createTimer", "params": [ 'test', [2012,07,12,4,10], [3,6] ], "callbacks": [ { "name": "showNotification", "params": ["Hello Amod"] } ] } ]
+}
+
+

@@ -12,7 +12,8 @@ body {
 }
 
 #main_screen {
-	background: #DFDFD6;
+	background: #356aa0;
+	opacity: 0.8
 }
 
 .toolbar_icon {
