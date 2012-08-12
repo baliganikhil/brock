@@ -11,7 +11,7 @@ function cause_creator( data ) {
 
 	});
 
-	console.log( source );
+	return source;
 }
 
 function effect_creator( data ) {

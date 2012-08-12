@@ -28,7 +28,7 @@ $('.edit_button').live('click', function() {
 		$(this).closest('.cause_point').find('.cause_properties').hide();
 		$(this).find('i').removeClass('icon-minus').addClass('icon-pencil');
 	}
-	
+
 });
 
 $('.close_button').live('click', function() {
@@ -76,14 +76,14 @@ function common_adder(target, icon, title, properies_html) {
 
 
 	$("#" + target).append(point);
-	$("#" + target).find('li:last').fadeIn("1500");	
+	$("#" + target).find('li:last').fadeIn("1500");
 
 	// if (target == 'lst_causes') {
-	// 	$("#" + target).find('li:last').show('slide', {direction: "left"});	
+	// 	$("#" + target).find('li:last').show('slide', {direction: "left"});
 	// } else {
 	// 	$("#" + target).find('li:last').show('slide', {direction: "right"});
 	// }
-	
+
 }
 
 $('.schedule_periodic').live('click', function() {
@@ -118,7 +118,7 @@ function add_cause_calendar() {
 	properties += "<th>Weekdays</th><td><label class='checkbox'><input type='checkbox' value='1'>Monday</label><label class='checkbox'><input type='checkbox' value='2'>Tuesday</label><label class='checkbox'><input type='checkbox' value='3'>Wednesday</label><label class='checkbox'><input type='checkbox' value='4'>Thursday</label><label class='checkbox'><input type='checkbox' value='5'>Friday</label><label class='checkbox'><input type='checkbox' value='6'>Saturday</label><label class='checkbox'><input type='checkbox' value='0'>Sunday</label></select></td>";
 	properties += "</tr>";
 
-	
+
 
 	properties += "</table>";
 
@@ -284,7 +284,7 @@ function add_effect_set_ringer() {
 			slide: function( event, ui ) {
 		//		$( "#amount" ).val( "$" + ui.value );
 				switch(ui.value) {
-					case 0: 
+					case 0:
 						$(this).closest('.effect_ringer_vol_properties').find('.effect_ringer_value').html('Silent');
 						break;
 
@@ -333,7 +333,7 @@ $('#btn_generate_onx').live('click', function() {
 	// Go through causes
 	$('li.each_cause').each(function(key, value) {
 		var cur_type = $(this).data('cause_effect_type');
-		
+
 
 		switch(cur_type) {
 			case 'Schedule': isValid = validate_schedule($(this));
@@ -397,13 +397,13 @@ $('#btn_generate_onx').live('click', function() {
 		}
 	});
 
-	
+
 
 	if (!isValid) {
 		return false;
 	}
 
-	cause_creator([cause_command, effect_command]);
+	display_generated_code(cause_creator([cause_command, effect_command]));
 });
 
 
@@ -466,7 +466,7 @@ function validate_phone(target) {
 			}
 			non_empty_count += 1;
 		}
-		
+
 	});
 
 	if (!isValid) {
@@ -507,9 +507,9 @@ function show_error_message(message, target) {
 	$('#error_message').slideDown();
 
 	if (!nullOrEmpty(target)) {
-		expand_causal_point($(target));	
+		expand_causal_point($(target));
 	}
-	
+
 }
 
 $('#close_error_message').live('click', function() {
@@ -528,6 +528,6 @@ function prepare_command() {
 }
 
 function display_generated_code(code) {
-	$("modal_generated_code #generated_code").val(code);
-	$("modal_generated_code").modal();
+	$("#modal_generated_code #generated_code").val(code);
+	$("#modal_generated_code").modal();
 }
