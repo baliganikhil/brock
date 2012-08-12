@@ -177,3 +177,8 @@ body {
 .schedule_datepicker {
 	background: #FFF;
 }
+
+#generated_code {
+	width: 500px;
+	height: 300px;
+}

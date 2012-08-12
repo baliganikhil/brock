@@ -123,7 +123,7 @@ function add_cause_calendar() {
 	properties += "</table>";
 
 	common_adder('lst_causes', 'calendar.png', "Schedule", properties);
-	$('.schedule_datepicker').datepicker();
+	$('.schedule_datepicker').datepicker($.datepicker.regional["en-GB"]);
 }
 
 function add_cause_location(in_out, latlong, range) {
@@ -431,7 +431,7 @@ function validate_schedule(target) {
 		} else {
 			curDate = curDate.split("/");
 			curYear = parseInt(curDate[2], 10);
-			curMonth = parseInt(curDate[1], 10);
+			curMonth = parseInt(curDate[1], 10) - 1;
 			curDate = parseInt(curDate[0], 10);
 		}
 
@@ -527,4 +527,7 @@ function prepare_command() {
 	//[ {"name": "createTimer", "params": [ 'test', [2012,07,12,4,10], [3,6] ], "callbacks": [ { "name": "showNotification", "params": ["Hello Amod"] } ] } ]
 }
 
-
+function display_generated_code(code) {
+	$("modal_generated_code #generated_code").val(code);
+	$("modal_generated_code").modal();
+}
