@@ -528,6 +528,6 @@ function prepare_command() {
 }
 
 function display_generated_code(code) {
-	$("modal_generated_code #generated_code").val(code);
-	$("modal_generated_code").modal();
+	$("#modal_generated_code #generated_code").val(code);
+	$("#modal_generated_code").modal();
 }
