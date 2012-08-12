@@ -22,10 +22,12 @@ $('.edit_button').live('click', function() {
 	if($(this).closest('li').css("height") == "90px") {
 		$(this).closest('li').animate({height: "400px"});
 		$(this).closest('.cause_point').find('.cause_properties').show();
+		$(this).closest('.cause_point').find('.effect_properties').show();
 		$(this).find('i').removeClass('icon-pencil').addClass('icon-minus');
 	} else {
 		$(this).closest('li').animate({height: "90px"});
 		$(this).closest('.cause_point').find('.cause_properties').hide();
+		$(this).closest('.cause_point').find('.effect_properties').hide();
 		$(this).find('i').removeClass('icon-minus').addClass('icon-pencil');
 	}
 
@@ -63,7 +65,8 @@ function common_adder(target, icon, title, properies_html) {
 	point += "</div>";
 
 	// Properties
-	point += "<div class='cause_properties row-fluid' style='display: none;'>";
+	var class_name = target == 'lst_causes' ? 'cause_properties' : 'effect_properties';
+	point += "<div class='" + class_name + " row-fluid' style='display: none;'>";
 
 	// Actual properties come here
 	point += properies_html;
@@ -71,7 +74,7 @@ function common_adder(target, icon, title, properies_html) {
 	point += "</div>";
 	point += "</div>";
 
-	var class_name = target == 'lst_causes' ? 'each_cause' : 'each_effect';
+	class_name = target == 'lst_causes' ? 'each_cause' : 'each_effect';
 	point = "<li class='" + class_name + "' data-cause_effect_type='" + title + "' style='display: none'>" + point + "</li>";
 
 
@@ -81,17 +84,15 @@ function common_adder(target, icon, title, properies_html) {
 }
 
 $('.schedule_periodic').live('click', function() {
-	toggle_scheduler($(this));
+	$(this).closest('.cause_properties').find('.schedule_weekdays').show();
+	$(this).closest('.cause_properties').find('.schedule_date').hide();
 });
 
-$('..schedule_once').live('click', function() {
-	toggle_scheduler($(this));
+$('.schedule_once').live('click', function() {
+	$(this).closest('.cause_properties').find('.schedule_weekdays').hide();
+	$(this).closest('.cause_properties').find('.schedule_date').show();
 });
 
-function toggle_scheduler(hello) {
-	$(hello).closest('.cause_properties').find('.schedule_weekdays').toggle();
-	$(hello).closest('.cause_properties').find('.schedule_date').toggle();
-}
 
 function add_cause_calendar() {
 	var properties = "<div class='btn-group' data-toggle='buttons-radio'><button data-value='once' class='btn btn-success active schedule_once'>Once</button><button data-value='periodic' class='btn btn-inverse schedule_periodic'>Periodic</button></div> ";
@@ -238,7 +239,8 @@ function add_effect_send_msg() {
 
 	qbeEnabled = false;
 
-	properties = "<div id=" + grid_id + "></div>";
+	var properties = "<div class='btn-group' data-toggle='buttons-radio'><button data-value='sender' class='btn btn-success active sms_sender'>Reply to Sender</button><button data-value='list' class='btn btn-inverse sms_list'>Specific Numbers</button></div> ";
+	properties += "<div id=" + grid_id + " style=''></div>";
 	properties += "<div class='div_effect_sms_body'>Message: <textarea class='effect_sms_body span12'></textarea></div>";
 	common_adder('lst_effects', 'sms.png', "Send SMS", properties);
 
@@ -254,16 +256,27 @@ function add_effect_send_msg() {
 		"actionButtonPosition":"line"
 	});
 
+    $('#' + grid_id).hide();
+
 }
+
+
+$('.sms_sender').live('click', function() {
+	$(this).closest('.effect_properties').find('.table_pane_grid').parent().hide();
+	//$(this).closest('.effect_properties').find('.schedule_date').show();
+});
+
+$('.sms_list').live('click', function() {
+	$(this).closest('.effect_properties').find('.table_pane_grid').parent().show();
+	//$(this).closest('.effect_properties').find('.schedule_date').hide();
+});
+
+
 
 function add_effect_add_notification() {
 	var properties = "<div class='div_effect_notification_body'>Message: <textarea class='effect_notification_body span12'></textarea></div>";
 
 	common_adder('lst_effects', 'notification.png', "Notification", properties);
-}
-
-function add_effect_launch_app() {
-
 }
 
 function add_effect_set_ringer() {
@@ -303,6 +316,11 @@ function add_effect_launch_browser() {
 function add_effect_kill_app() {
 	var properties = "";
 	common_adder('lst_effects', 'kill.png', "Kill running apps", properties);
+}
+
+function add_effect_launch_app() {
+	var properties = "<div><h4>App Name</h4><input type='text' class='app_name' style='height: 30px;'></div>";
+	common_adder('lst_effects', 'launcher.png', "Launch App", properties);
 }
 
 //**************//
@@ -509,6 +527,7 @@ function nullOrEmpty(target) {
 function expand_causal_point(target) {
 	$(target).animate({height: "400px"});
 	$(target).find('.cause_properties').show();
+	$(target).find('.effect_properties').show();
 	$(target).find('i.icon-pencil').removeClass('icon-pencil').addClass('icon-minus');
 }
 

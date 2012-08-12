@@ -130,7 +130,7 @@ body {
 }
 
 .effect_sms_body, .effect_notification_body {
-	height: 85px;
+	height: 30px;
 	margin-top: 10px;
 }
 
