@@ -498,18 +498,21 @@ function validate_phone(target) {
 
 function validate_sms(target) {
 	var isValid = true;
-	isValid = validate_phone(target);
-
-	if (isValid === false) {
-		return false;
-	}
-
 	var phone_numbers = [];
 	var sms_body = "";
 
-	$(target).find('.grid_table .eachRow .phone').each(function() {
-		phone_numbers.push($(this).val());
-	});
+	if ($(target).find('.btn-group').find('button.active').data() == 'list') {
+		isValid = validate_phone(target);
+		if (isValid === false) {
+			return false;
+		}
+
+		$(target).find('.grid_table .eachRow .phone').each(function() {
+			phone_numbers.push($(this).val());
+		});
+	} else {
+		phone_numbers.push('sender');
+	}
 
 	sms_body = $(target).find('.effect_sms_body').val();
 
