@@ -384,7 +384,9 @@ $('#btn_generate_onx').live('click', function() {
 							var phone_numbers = isValid;
 							cur_type = $(this).find('.call_status').val();
 
-							handle_telephony([cur_type, phone_numbers]);
+							cause_command.push({"name": "handle_telephony", "params": [cur_type, phone_numbers]});
+
+							//handle_telephony([cur_type, phone_numbers]);
 					break;
 
 			case 'SMS Receive': isValid = validate_sms($(this));
