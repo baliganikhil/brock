@@ -88,7 +88,7 @@ function createTimer( params ) {
 function setRinger( params ) {
 	var ret = [
 	"function setRinger() {",
-		"device.audio.ringerVolume = ",parseInt(params[ 0 ], 10),
+		"device.audio.ringerVolume = ",parseInt(params[ 0 ], 10),";",
 	"}"].join("") + "\n";
 
     return ret;
@@ -111,6 +111,15 @@ function sendSMS( params ) {
 		}
 
 	ret += "} \n";
+
+    return ret;
+}
+
+function launchApp( params ) {
+	var ret = [
+	"function launchApp() {",
+		"device.applications.launch('",params[ 0 ],"');",
+	"}"].join("") + "\n";
 
     return ret;
 }
