@@ -31,6 +31,8 @@ $('.edit_button').live('click', function() {
 		$(this).find('i').removeClass('icon-minus').addClass('icon-pencil');
 	}
 
+	$('input:text').height('30px');
+
 });
 
 $('.close_button').live('click', function() {
@@ -179,6 +181,8 @@ function add_cause_call_receive() {
 		"actionButtonPosition":"line"
 	});
 
+	
+
 
 }
 
@@ -274,6 +278,8 @@ function add_effect_send_msg() {
 		"deleteVisible": true,
 		"actionButtonPosition":"line"
 	});
+
+
 
     $('#' + grid_id).hide();
 
@@ -434,6 +440,15 @@ $('#btn_generate_onx').live('click', function() {
 								effect_command.push({ "name": "showNotification", "params": [notification_msg] });
 							}
 					break;
+
+			case 'Launch App':
+							var app_name = $(this).find('.app_name').val();
+							if (nullOrEmpty(app_name)) {
+								show_error_message("Please provide an app name", $(this));
+								return false;
+							}
+							effect_command.push({"name": "launchApp", "params": [app_name]});
+							break;
 
 			default:
 		}
