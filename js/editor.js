@@ -123,7 +123,7 @@ function add_cause_calendar() {
 	properties += "</table>";
 
 	common_adder('lst_causes', 'calendar.png', "Schedule", properties);
-	$('.schedule_datepicker').datepicker($.datepicker.regional["en-GB"]);
+	$('.schedule_datepicker').datepicker({"dateFormat": "dd/mm/yy"});
 }
 
 function add_cause_location(in_out, latlong, range) {
