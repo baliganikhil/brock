@@ -78,12 +78,6 @@ function common_adder(target, icon, title, properies_html) {
 	$("#" + target).append(point);
 	$("#" + target).find('li:last').fadeIn("1500");
 
-	// if (target == 'lst_causes') {
-	// 	$("#" + target).find('li:last').show('slide', {direction: "left"});
-	// } else {
-	// 	$("#" + target).find('li:last').show('slide', {direction: "right"});
-	// }
-
 }
 
 $('.schedule_periodic').live('click', function() {
@@ -184,7 +178,7 @@ function add_cause_sms_receive() {
 
 	qbeEnabled = false;
 
-	properties = "<div id=" + grid_id + "></div>";
+	properties = "<div id=" + grid_id + " style='height: 180px;'></div>";
 	properties += "<div>Contains: <input type='text'></div>";
 	common_adder('lst_causes', 'sms.png', "SMS Receive", properties);
 
@@ -485,7 +479,18 @@ function validate_sms(target) {
 	var isValid = true;
 	isValid = validate_phone(target);
 
-	return isValid;
+	if (isValid === false) {
+		return false;
+	}
+
+	var phone_numbers = [];
+	var sms_body = "";
+
+	$(target).find('.grid_table .eachRow .phone').each(function() {
+		phone_numbers.push($(this).val());
+	});
+
+	sms_body = $(target).find('.effect_sms_body').val();
 }
 
 function nullOrEmpty(target) {
