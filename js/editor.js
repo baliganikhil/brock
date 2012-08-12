@@ -410,8 +410,8 @@ $('#btn_generate_onx').live('click', function() {
 
 function validate_schedule(target) {
 	var once_periodic = $(target).find('.btn-group').find('button.active');
-	var curHour = $(target).find('.hour').val();
-	var curMin = $(target).find('.minute').val();
+	var curHour = parseInt($(target).find('.hour').val(), 10);
+	var curMin = parseInt($(target).find('.minute').val(), 10);
 
 	var curDate = "";
 	var curMonth = "";
@@ -431,9 +431,9 @@ function validate_schedule(target) {
 			return false;
 		} else {
 			curDate = curDate.split("/");
-			curYear = curDate[2];
-			curMonth = curDate[1];
-			curDate = curDate[0];
+			curYear = parseInt(curDate[2], 10);
+			curMonth = parseInt(curDate[1], 10);
+			curDate = parseInt(curDate[0], 10);
 		}
 
 	} else {
@@ -443,7 +443,7 @@ function validate_schedule(target) {
 		}
 
 		$(target).find('input:checkbox:checked').each(function(key, value) {
-			curWeek.push($(this).val());
+			curWeek.push(parseInt($(this).val(), 10));
 		});
 	}
 
