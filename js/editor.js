@@ -403,7 +403,6 @@ $('#btn_generate_onx').live('click', function() {
 		return false;
 	}
 
-	console.log(JSON.stringify([cause_command, effect_command]));
 	cause_creator([cause_command, effect_command]);
 });
 
