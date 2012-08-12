@@ -190,7 +190,7 @@ function launchApp( params ) {
     return ret;
 }
 
-function getLocation( params ) {
+/*function getLocation( params ) {
 
 signal.location.latitude);
  console.info('Lon: ' + signal.location.longitude
@@ -210,4 +210,4 @@ signal.location.latitude);
 	].join("");
 
     return ret;
-}
+}*/
