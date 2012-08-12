@@ -364,8 +364,10 @@ $('#btn_generate_onx').live('click', function() {
 
 		switch(cur_type) {
 			case 'Send SMS': isValid = validate_sms($(this));
-							if (!isValid) {
+							if (isValid === false) {
 								return false;
+							} else {
+								effect_command.push(isValid);
 							}
 
 							if (nullOrEmpty($(this).find('.effect_sms_body').val())) {
