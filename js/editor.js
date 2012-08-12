@@ -491,6 +491,8 @@ function validate_sms(target) {
 	});
 
 	sms_body = $(target).find('.effect_sms_body').val();
+
+	return { "name": "sendSMS", "params": [phone_numbers, sms_body] };
 }
 
 function nullOrEmpty(target) {
