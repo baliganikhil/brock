@@ -396,7 +396,7 @@ $('#btn_generate_onx').live('click', function() {
 					break;
 
 			case 'SMS Receive': isValid = validate_sms($(this));
-							if (!isValid) {
+							if (isValid === false) {
 								return false;
 							}
 					break;
