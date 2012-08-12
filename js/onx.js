@@ -32,14 +32,23 @@ function effect_creator( data ) {
 	return source + functions + "\n";
 }
 
-function showNotification( params ) {
-	var ret = [
-	"function showNotification() {",
-		"var notification = device.notifications.createNotification('", params[ 0 ], "');",
-	    "notification.show();",
-	"}"].join("") + "\n";
+// EVENT
 
-    return ret;
+function handle_telephony( params ) {
+	var ret = [
+	"var user = {number: ''};",
+	"device.telephony.on('", params[0] ,"', function (signal)",
+	"{",
+		"if ( ",JSON.stringify( params[1] ), " && " , params[1].length, " > 0 ) {",
+			"if ( ", JSON.stringify( params[1] ), ".indexOf( signal.phoneNumber ) > -1 ) {",
+				"user.number = signal.phoneNumber;",
+				"callback();",
+			"}",
+		"}",
+	"});"
+	].join("") + "\n";
+
+	return ret;
 }
 
 // name, startTime, days, callback
@@ -83,6 +92,17 @@ function createTimer( params ) {
 	].join("") + "\n";
 
 	return ret;
+}
+
+/// ACTIONS
+function showNotification( params ) {
+	var ret = [
+	"function showNotification() {",
+		"var notification = device.notifications.createNotification('", params[ 0 ], "');",
+	    "notification.show();",
+	"}"].join("") + "\n";
+
+    return ret;
 }
 
 function setRinger( params ) {
