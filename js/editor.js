@@ -163,8 +163,9 @@ function add_cause_call_receive() {
 
 	qbeEnabled = false;
 
-	properties = "<div id=" + grid_id + "></div>";
-	common_adder('lst_causes', 'call.png', "Call Receive", properties);
+	properties = "<div><select class='call_status'><option value='idle'>Idle</option><option value='busy'>On Call</option></select></div>";
+	properties += "<div id=" + grid_id + "></div>";
+	common_adder('lst_causes', 'call.png', "Incoming Call", properties);
 
     renderGrid({
 		"id": grid_id,
@@ -375,8 +376,8 @@ $('#btn_generate_onx').live('click', function() {
 							}
 				break;
 
-			case 'Call Receive': isValid = validate_phone($(this));
-							if (!isValid) {
+			case 'Incoming Call': isValid = validate_phone($(this));
+							if (isValid === false) {
 								return false;
 							}
 					break;
@@ -489,6 +490,7 @@ function validate_phone(target) {
 	var non_empty_count = 0;
 	var phone_exp = /^[0-9]{10}$/;
 	var isValid = true;
+	var phone_numbers = [];
 
 	$(target).find('.eachRow').each(function() {
 		var cur_phone = $(this).find('.phone').val();
@@ -503,7 +505,7 @@ function validate_phone(target) {
 
 	});
 
-	if (!isValid) {
+	if (isValid === false) {
 		return false;
 	}
 
@@ -511,7 +513,11 @@ function validate_phone(target) {
 		show_error_message ("You haven't entered any phone numbers", target);
 		return false;
 	} else {
-		return true;
+		$(target).find('.grid_table .eachRow .phone').each(function() {
+			phone_numbers.push($(this).val());
+		});
+
+		return phone_numbers;
 	}
 }
 
@@ -526,9 +532,9 @@ function validate_sms(target) {
 			return false;
 		}
 
-		$(target).find('.grid_table .eachRow .phone').each(function() {
-			phone_numbers.push($(this).val());
-		});
+		phone_numbers = isValid;
+
+		
 	} else {
 		phone_numbers.push('sender');
 	}
