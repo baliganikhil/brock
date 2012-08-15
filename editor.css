@@ -95,8 +95,8 @@ body {
 	height: 60px;
 }
 
-.cause_properties {
-	height: 330px;
+.cause_properties, .effect_properties {
+	height: 285px;
 	margin-top: 25px;
 	overflow: auto;
 }

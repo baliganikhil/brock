@@ -37,10 +37,10 @@ $('.edit_button').live('click', function() {
 
 $('.close_button').live('click', function() {
 	if ($('#lst_causes li').length + $('#lst_effects li').length - 1 === 0) {
-		$('#main_screen').fadeIn();
+		$('#intro_message').css('background-color', '#FFF');
+		$('#main_screen').fadeIn(2000);
 		$('#causal_area').hide();
 
-		$('#intro_message').css('background-color', '#FFF');
 	}
 
 	$(this).closest('li').fadeOut(200, function() {$(this).remove();});
@@ -49,7 +49,7 @@ $('.close_button').live('click', function() {
 // Causes
 
 function common_adder(target, icon, title, properies_html) {
-	$('#main_screen').hide();
+	$('#main_screen').slideUp();
 	$('#causal_area').show();
 	$('#intro_message').css('background', 'none');
 
@@ -265,9 +265,10 @@ function add_effect_send_msg() {
 
 	qbeEnabled = false;
 
-	var properties = "<div class='btn-group' data-toggle='buttons-radio'><button data-value='sender' class='btn btn-success active sms_sender'>Reply to Sender</button><button data-value='list' class='btn btn-inverse sms_list'>Specific Numbers</button></div> ";
+	var properties = "<div class='div_effect_sms_body'>Message: <textarea class='effect_sms_body span12'></textarea></div>";
+	properties += "<div class='btn-group' data-toggle='buttons-radio'><button data-value='sender' class='btn btn-success active sms_sender'>Reply to Sender</button><button data-value='list' class='btn btn-inverse sms_list'>Specific Numbers</button></div> ";
 	properties += "<div id=" + grid_id + " style=''></div>";
-	properties += "<div class='div_effect_sms_body'>Message: <textarea class='effect_sms_body span12'></textarea></div>";
+	
 	common_adder('lst_effects', 'sms.png', "Send SMS", properties);
 
     renderGrid({
