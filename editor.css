@@ -186,3 +186,9 @@ body {
 .properties_header {
 	margin-top: 30px;
 }
+
+#about_brock p {
+	font-size: 12px;
+	line-height: 25px;
+	margin-bottom: 30px;
+}
