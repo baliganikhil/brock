@@ -202,3 +202,8 @@ body {
 	background-color: #FFF;
 	margin: 30px;
 }
+
+.creator_desc {
+	float: left;
+	margin: 15px;
+}
