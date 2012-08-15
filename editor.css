@@ -13,8 +13,8 @@ body {
 }
 
 #main_screen {
-	background: #356aa0;
-	opacity: 0.8
+	opacity: 0.8;
+	margin: 30px;
 }
 
 .toolbar_icon {
@@ -145,9 +145,12 @@ body {
 
 #intro_message {
 	margin-top: 28px;
-	border: dashed 1px silver;
 	height: 700px;
 /*	background: #DFDFD6;*/
+
+	border: solid 1px silver;
+	background: #FFF;
+	border-radius: 25px;
 }
 
 #div_causes {
@@ -206,4 +209,12 @@ body {
 .creator_desc {
 	float: left;
 	margin: 15px;
+}
+
+.intro_panel {
+	margin-top: 10px;
+}
+
+.intro_panel p {
+	 margin-top: 20px;
 }
