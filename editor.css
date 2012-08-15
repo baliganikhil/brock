@@ -1,5 +1,6 @@
 body {
 	background: url('images/yahoo_wp.jpg');
+	background-attachment: fixed;
 }
 
 #brock_body {
@@ -187,8 +188,17 @@ body {
 	margin-top: 30px;
 }
 
-#about_brock p {
+.written_material_wrapper {
+	border-radius: 25px;
+}
+
+.written_material_wrapper p {
 	font-size: 12px;
 	line-height: 25px;
-	margin-bottom: 30px;
+	margin-bottom: 15px;
+}
+
+.written_material {
+	background-color: #FFF;
+	margin: 30px;
 }
