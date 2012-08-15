@@ -30,6 +30,8 @@ body {
 
 .toolbar_icon img {
 	border-radius: 10px;
+	margin-left: 10px;
+	width: 80%;
 }
 
 .toolbar_icon img:hover {
