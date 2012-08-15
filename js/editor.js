@@ -57,7 +57,7 @@ function common_adder(target, icon, title, properies_html) {
 	point += "<div class='cause_point_header row-fluid'>";
 
 	// Icon
-	point += "<div style='float: left;'><img src='images/" + icon + "' style='height: 75px; width: 75px;'></div>";
+	point += "<div style='float: left;'><img src='images/" + icon + "' style='height: 80%; margin-top: 14px; margin-right: 10px;'></div>";
 
 	point += "<div class='cause_title'>";
 
