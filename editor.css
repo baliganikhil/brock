@@ -218,3 +218,16 @@ body {
 .intro_panel p {
 	 margin-top: 20px;
 }
+
+.video_tutorial {
+	border: solid 1px silver;
+	padding: 10px;
+	height: 280px;
+	color: silver;
+	font-size: 16px;
+	text-align: center;
+}
+
+.video_tutorial p {
+	margin-top: 100px;
+}
