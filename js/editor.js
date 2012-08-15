@@ -205,8 +205,9 @@ function add_cause_sms_receive() {
 
 	qbeEnabled = false;
 
-	properties = "<div id=" + grid_id + " style='height: 180px;'></div>";
-	properties += "<div>Contains: <input type='text' class='sms_words'></div>";
+	properties = "<div>Contains: <input type='text' class='sms_words'></div>";
+	properties += "<div id=" + grid_id + "></div>";
+	
 	common_adder('lst_causes', 'sms.png', "SMS Receive", properties);
 
     renderGrid({
