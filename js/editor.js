@@ -57,7 +57,7 @@ function common_adder(target, icon, title, properies_html) {
 	point += "<div class='cause_point_header row-fluid'>";
 
 	// Icon
-	point += "<div style='float: left;'><img src='images/" + icon + "' style='height: 80%; margin-top: 14px; margin-right: 10px;'></div>";
+	point += "<div style='float: left;'><img src='images/" + icon + "' style='height: 80%; margin-top: 14px; margin-right: 10px;' class='li_icon'></div>";
 
 	point += "<div class='cause_title'>";
 
@@ -442,6 +442,7 @@ $('#btn_generate_onx').live('click', function() {
 
 							if (nullOrEmpty($(this).find('.effect_sms_body').val())) {
 								show_error_message("Please enter the SMS to be sent", $(this));
+								isValid = false;
 								return false;
 							}
 					break;
@@ -454,6 +455,7 @@ $('#btn_generate_onx').live('click', function() {
 
 							if (nullOrEmpty(notification_msg)) {
 								show_error_message("Please enter notification to be set", $(this));
+								isValid = false;
 								return false;
 							} else {
 								effect_command.push({ "name": "showNotification", "params": [notification_msg] });
@@ -464,6 +466,7 @@ $('#btn_generate_onx').live('click', function() {
 							var app_name = $(this).find('.app_name').val();
 							if (nullOrEmpty(app_name)) {
 								show_error_message("Please provide an app name", $(this));
+								isValid = false;
 								return false;
 							}
 							effect_command.push({"name": "launchApp", "params": [app_name]});
@@ -629,3 +632,11 @@ function display_generated_code(code) {
 	$("#modal_generated_code #generated_code").val(code);
 	$("#modal_generated_code").modal();
 }
+
+$('.li_icon').live('click', function() {
+	expand_causal_point($(this).closest('li'));
+});
+
+$('.cause_title').live('click', function() {
+	expand_causal_point($(this).closest('li'));
+});
