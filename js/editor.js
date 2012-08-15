@@ -39,6 +39,8 @@ $('.close_button').live('click', function() {
 	if ($('#lst_causes li').length + $('#lst_effects li').length - 1 === 0) {
 		$('#main_screen').fadeIn();
 		$('#causal_area').hide();
+
+		$('#intro_message').css('background-color', '#FFF');
 	}
 
 	$(this).closest('li').fadeOut(200, function() {$(this).remove();});
@@ -49,6 +51,7 @@ $('.close_button').live('click', function() {
 function common_adder(target, icon, title, properies_html) {
 	$('#main_screen').hide();
 	$('#causal_area').show();
+	$('#intro_message').css('background', 'none');
 
 	var point = "<div class='cause_point'>";
 	point += "<div class='cause_point_header row-fluid'>";
