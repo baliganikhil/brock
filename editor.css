@@ -35,8 +35,8 @@ body {
 }
 
 .toolbar_icon img:hover {
-	margin-top: 3px;
-	margin-left: 3px;
+	margin-top: 2px;
+	margin-left: 12px;
 }
 
 #lst_causes, #lst_effects {
