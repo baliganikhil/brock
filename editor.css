@@ -233,3 +233,7 @@ body {
 .video_tutorial p {
 	margin-top: 100px;
 }
+
+.beta_sign {
+    font-size: 9px;
+}
